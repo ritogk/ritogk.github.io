@@ -6,9 +6,9 @@
     <title>Client2</title>
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script>
+      var peer = null
       window.onload = () => {
-        debugger
-        const peer = new Peer("client2", {
+        peer = new Peer("client2", {
           host: "945a-60-91-83-78.ngrok.io",
           port: 443,
           path: "/",
@@ -28,11 +28,16 @@
           })
         })
       }
+
+      const connect = () => {
+        console.log("connect")
+        peer.connect("client1")
+      }
     </script>
   </head>
   <body>
     <h1>Client2</h1>
-    <button onclick="peer.connect('client1')">connection</button>
+    <button onclick="connect()">connection</button>
     <div>
       <video id="video" muted="muted"></video>
     </div>
