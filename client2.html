@@ -23,6 +23,7 @@
         peer.on("call", function (call) {
           call.answer()
           call.on("stream", (stream) => {
+            console.log("stream")
             video.srcObject = stream
             video.play()
           })
