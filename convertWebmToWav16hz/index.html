@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <script src="./ffmpeg.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3>Upload a video to transcode to mp4 (x264) and play!</h3>
+    <video id="output-video" controls muted autoplay></video><br />
+    <br />
+    <input type="file" id="uploader" />
+    <p id="message"></p>
+    <br />
+
+    <div>
+      <textarea id="log" rows="30" cols="100" autofocus></textarea>
+    </div>
+
+    <br />
+    <script>
+      var txt = document.getElementById("log")
+      const { createFFmpeg, fetchFile } = FFmpeg
+      const ffmpeg = createFFmpeg({
+        log: true,
+        logger: ({ message }) => {
+          txt.value += "\n" + message
+        },
+      })
+
+      // 参考URL
+      // https://github.com/ffmpegwasm/ffmpeg.wasm/blob/master/examples/browser/transcode.html
+      // https://zenn.dev/maruware/scraps/9febddb3aa2622
+      const transcode = async ({ target: { files } }) => {
+        const message = document.getElementById("message")
+        const { name } = files[0]
+        message.innerHTML = "Loading ffmpeg-core.js"
+        await ffmpeg.load()
+        ffmpeg.FS("writeFile", name, await fetchFile(files[0]))
+        message.innerHTML = "Start transcoding"
+        await ffmpeg.run("-i", name, "output.mp4")
+        message.innerHTML = "Complete transcoding"
+        const data = ffmpeg.FS("readFile", "output.mp4")
+
+        const video = document.getElementById("output-video")
+        video.src = URL.createObjectURL(
+          new Blob([data.buffer], { type: "video/mp4" })
+        )
+        // await ffmpeg.write(name, files[0])
+        // message.innerHTML = "Start transcoding"
+        // await ffmpeg.transcode(name, "output.mp4")
+        // message.innerHTML = "Transcoding completed"
+        // const data = ffmpeg.read("output.mp4")
+        // ffmpeg.remove("output.mp4")
+
+        // const video = document.getElementById("output-video")
+        // video.src = URL.createObjectURL(
+        //   new Blob([data.buffer], {
+        //     type: "video/mp4",
+        //   })
+        // )
+      }
+      const elm = document.getElementById("uploader")
+      elm.addEventListener("change", transcode)
+    </script>
+  </body>
+</html>
