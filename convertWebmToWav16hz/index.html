@@ -29,6 +29,8 @@
       <textarea id="log" rows="30" cols="100" autofocus></textarea>
     </div>
 
+    <a id="download" download="video.mp4">downaload</a>
+
     <br />
     <script>
       var txt = document.getElementById("log")
@@ -55,22 +57,14 @@
         const data = ffmpeg.FS("readFile", "output.mp4")
 
         const video = document.getElementById("output-video")
-        video.src = URL.createObjectURL(
+        const blobUrl = URL.createObjectURL(
           new Blob([data.buffer], { type: "video/mp4" })
         )
-        // await ffmpeg.write(name, files[0])
-        // message.innerHTML = "Start transcoding"
-        // await ffmpeg.transcode(name, "output.mp4")
-        // message.innerHTML = "Transcoding completed"
-        // const data = ffmpeg.read("output.mp4")
-        // ffmpeg.remove("output.mp4")
+        video.src = blobUrl
 
-        // const video = document.getElementById("output-video")
-        // video.src = URL.createObjectURL(
-        //   new Blob([data.buffer], {
-        //     type: "video/mp4",
-        //   })
-        // )
+        // mp4をダウンロードする。
+        const a = document.getElementById("download")
+        a.href = blobUrl
       }
       const elm = document.getElementById("uploader")
       elm.addEventListener("change", transcode)
