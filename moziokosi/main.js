@@ -38,4 +38,9 @@ window.onload = async () => {
     }
     transcription.transcribe(onProgressTranscription)
   })
+
+  const btnDownloadElement = document.getElementById("btnDownload")
+  btnDownloadElement.addEventListener("click", () => {
+    transcription.download()
+  })
 }

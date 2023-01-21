@@ -105,7 +105,6 @@ export class Transcription {
           Number(proc_time[1]) * 60 +
           Number(proc_time[2])
         const ratio = proc_seconds / this.#audio_duration
-        debugger
         this.#transcription.push({
           time: str.substr(0, 31),
           speach: str.substr(33, str.length - 33),
@@ -119,5 +118,19 @@ export class Transcription {
 
   getTranscription = () => {
     return this.#transcription
+  }
+
+  download = () => {
+    const text = this.#transcription.reduce(
+      (accumulator, x) => accumulator + `${x.time} ${x.speach}\n`,
+      ""
+    )
+    const blob = new Blob([text], { type: "text/plain" })
+    const aTag = document.createElement("a")
+    aTag.href = URL.createObjectURL(blob)
+    aTag.target = "_blank"
+    aTag.download = "transcription.txt"
+    aTag.click()
+    URL.revokeObjectURL(aTag.href)
   }
 }
