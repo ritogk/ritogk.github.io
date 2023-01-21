@@ -33,8 +33,17 @@ window.onload = async () => {
     const audioBlobUrl = transcode.getTranscodedBlobUrl()
     await transcription.setAudio(audioBlobUrl)
 
+    const intervalID = setInterval(() => {
+      document.getElementById("progressTranscribe").value =
+        document.getElementById("progressTranscribe").value + 0.0001
+    }, 300)
+
     const onProgressTranscription = (ratio) => {
       document.getElementById("progressTranscribe").value = ratio
+      if (ratio >= 1) {
+        clearInterval(intervalID)
+        alert("文字起こし完了")
+      }
     }
     transcription.transcribe(onProgressTranscription)
   })
