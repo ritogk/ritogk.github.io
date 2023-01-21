@@ -110,7 +110,7 @@ export class Transcription {
           speach: str.substr(33, str.length - 33),
         })
 
-        callbackFuncOnProgress(ratio)
+        callbackFuncOnProgress(ratio, str)
       }
       console.log(str)
     }

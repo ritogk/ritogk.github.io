@@ -38,8 +38,10 @@ window.onload = async () => {
         document.getElementById("progressTranscribe").value + 0.0001
     }, 300)
 
-    const onProgressTranscription = (ratio) => {
+    const onProgressTranscription = (ratio, log) => {
       document.getElementById("progressTranscribe").value = ratio
+      document.getElementById("logTranscription").value =
+        document.getElementById("logTranscription").value + "\n" + log
       if (ratio >= 1) {
         clearInterval(intervalID)
         alert("文字起こし完了")
