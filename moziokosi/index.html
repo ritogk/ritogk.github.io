@@ -176,19 +176,6 @@
     <!-- End Hero Section -->
 
     <main id="main">
-      <select
-        class="form-select"
-        id="single-select-field"
-        data-placeholder="Choose one thing"
-      >
-        <option></option>
-        <option>Reactive</option>
-        <option>Solution</option>
-        <option>Conglomeration</option>
-        <option>Algoritm</option>
-        <option>Holistic</option>
-      </select>
-
       <p class="fs-5 text-center">文字起こしのモデル</p>
       <div class="mt-3 d-flex flex-row gap-2">
         <label class="radio">
@@ -202,7 +189,6 @@
       </div>
 
       <!-- file drag adn drop-->
-
       <form>
         <fieldset class="upload_dropZone text-center mb-3 p-4">
           <legend class="visually-hidden">Image uploader</legend>
@@ -233,6 +219,35 @@
           ></div>
         </fieldset>
       </form>
+
+      <!-- 言語選択 -->
+      <p class="fs-5 text-center">文字起こし言語</p>
+      <select
+        class="form-select"
+        id="single-select-field"
+        data-placeholder="Choose one thing"
+      >
+        <option></option>
+        <option>Reactive</option>
+        <option>Solution</option>
+        <option>Conglomeration</option>
+        <option>Algoritm</option>
+        <option>Holistic</option>
+      </select>
+
+      <div class="mt-3 d-flex flex-row gap-2">
+        <label class="radio">
+          <input type="button" name="gender" value="designs" />
+          <span
+            style="
+              border-color: #3d91ff;
+              background-color: #3d91ff;
+              color: #fff;
+            "
+            ><i class="fa fa-file-audio"></i> 文字起こし</span
+          >
+        </label>
+      </div>
 
       <svg style="display: none">
         <defs>
