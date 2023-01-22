@@ -1,0 +1,33 @@
+/*Radio Button*/
+label.radio {
+  cursor: pointer;
+  width: 100%;
+}
+
+label.radio input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+label.radio span {
+  padding: 12px 14px;
+  width: 100%;
+  text-align: center;
+  border: 2px solid #00b3bb;
+  display: inline-block;
+  color: #00b3bb;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+label.radio input:checked + span {
+  border-color: #00b3bb;
+  background-color: #00b3bb;
+  color: #fff;
+}
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
