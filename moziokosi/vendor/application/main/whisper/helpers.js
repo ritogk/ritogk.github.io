@@ -54,8 +54,6 @@ window.OfflineAudioContext =
   window.OfflineAudioContext || window.webkitOfflineAudioContext
 
 cbProgress = function (p) {
-  let el = document.getElementById("fetch-whisper-progress")
-  el.innerHTML = Math.round(100 * p) + "%"
   console.log(Math.round(100 * p) + "%")
 }
 
@@ -170,18 +168,18 @@ async function fetchRemote(url, cbProgress, cbPrint) {
 // load remote data
 // - check if the data is already in the IndexedDB
 // - if not, fetch it from the remote URL and store it in the IndexedDB
-function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
-  if (cbProgress === null) {
-    cbProgress = window.cbProgress
+function loadRemote(url, dst, size_mb, onProgress, cbReady, cbCancel, cbPrint) {
+  if (!onProgress) {
+    onProgress = window.cbProgress
   }
-  if (cbReady === null) {
+  if (!cbReady) {
     cbReady = storeFS
   }
-  if (cbCancel === null) {
+  if (!cbCancel) {
     cbCancel = window.cbCancel
   }
 
-  if (cbPrint === null) {
+  if (!cbPrint) {
     cbPrint = printTextarea
   }
   // query the storage quota and print it
@@ -218,27 +216,14 @@ function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
 
     rq.onsuccess = function (event) {
       if (rq.result) {
+        // if (false) {
         cbPrint('loadRemote: "' + url + '" is already in the IndexedDB')
         cbReady(dst, rq.result)
       } else {
         // data is not in the IndexedDB
         cbPrint('loadRemote: "' + url + '" is not in the IndexedDB')
 
-        // alert and ask the user to confirm
-        if (
-          !confirm(
-            "You are about to download " +
-              size_mb +
-              " MB of data.\n" +
-              "The model data will be cached in the browser for future use.\n\n" +
-              "Press OK to continue."
-          )
-        ) {
-          cbCancel()
-          return
-        }
-
-        fetchRemote(url, cbProgress, cbPrint).then(function (data) {
+        fetchRemote(url, onProgress, cbPrint).then(function (data) {
           if (data) {
             // store the data in the IndexedDB
             var rq = indexedDB.open(dbName, dbVersion)

@@ -9,10 +9,10 @@ export class Transcription {
   constructor(module) {
     this.#module = module
   }
-  loadModel = () => {
-    const model = "small"
+  loadModel = (modelName, onProgress) => {
     let urls = {
-      small: "./vendor/whisper/models/ggml-small.bin",
+      base: "./vendor/application/main/whisper/models/ggml-base.bin",
+      small: "./vendor/application/main/whisper/models/ggml-small.bin",
     }
 
     let sizes = {
@@ -24,11 +24,11 @@ export class Transcription {
       small: 466,
     }
 
-    let url = urls[model]
+    let url = urls[modelName]
     let dst = "whisper.bin"
-    let size_mb = sizes[model]
+    let size_mb = sizes[modelName]
 
-    loadRemote(url, dst, size_mb, null, null, null, null)
+    loadRemote(url, dst, size_mb, onProgress, null, null, null)
   }
 
   setAudio = async (audioBlobUrl) => {

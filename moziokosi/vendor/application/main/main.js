@@ -12,46 +12,78 @@ export const startMain = async () => {
     document.getElementById("ffmpegProgress").value = p.ratio
   }
 
-  document.getElementById("transcodeArea").style.display = "none"
-  const completeTranscode = () => {
-    document.getElementById("transcodeArea").style.display = ""
+  // document.getElementById("transcodeArea").style.display = "none"
+  // const completeTranscode = () => {
+  //   document.getElementById("transcodeArea").style.display = ""
+  // }
+
+  // const transcode = new Transcode(
+  //   ffmpeg,
+  //   onProgressTranscode,
+  //   completeTranscode
+  // )
+
+  const progressLoadModel = document.getElementById("progress-load-model")
+  const onProgressLoadModel = function (ratio) {
+    if (ratio >= 1) {
+      progressLoadModel.style.display = "none"
+    } else {
+      progressLoadModel.style.display = "block"
+    }
+    progressLoadModel.children[0].style.width = Math.round(100 * ratio) + "%"
   }
 
-  const transcode = new Transcode(
-    ffmpeg,
-    onProgressTranscode,
-    completeTranscode
-  )
-
+  // const onProgressLoadModel = (ratio) => {
+  //   document.getElementById("progressTranscribe").value = ratio
+  //   document.getElementById("logTranscription").value =
+  //     document.getElementById("logTranscription").value + "\n" + log
+  //   if (ratio >= 1) {
+  //     clearInterval(intervalID)
+  //     alert("文字起こし完了")
+  //   }
+  // }
   const transcription = new Transcription(module, instance)
-  const btnModelDlElement = document.getElementById("btnModelDl")
-  btnModelDlElement.addEventListener("click", transcription.loadModel)
 
-  const btnTranscribeElement = document.getElementById("btnTranscribe")
-  btnTranscribeElement.addEventListener("click", async (e) => {
-    // 変換したオーディオファイルのblobUrl
-    const audioBlobUrl = transcode.getTranscodedBlobUrl()
-    await transcription.setAudio(audioBlobUrl)
+  // 初期モデル
+  transcription.loadModel("base", onProgressLoadModel)
 
-    const intervalID = setInterval(() => {
-      document.getElementById("progressTranscribe").value =
-        document.getElementById("progressTranscribe").value + 0.0001
-    }, 300)
-
-    const onProgressTranscription = (ratio, log) => {
-      document.getElementById("progressTranscribe").value = ratio
-      document.getElementById("logTranscription").value =
-        document.getElementById("logTranscription").value + "\n" + log
-      if (ratio >= 1) {
-        clearInterval(intervalID)
-        alert("文字起こし完了")
-      }
-    }
-    transcription.transcribe(onProgressTranscription)
+  // 「高速」ボタン
+  const radioHighSpeed = document.getElementById("radioHighSpeed")
+  radioHighSpeed.addEventListener("click", () => {
+    transcription.loadModel("base", onProgressLoadModel)
   })
 
-  const btnDownloadElement = document.getElementById("btnDownload")
-  btnDownloadElement.addEventListener("click", () => {
-    transcription.download()
+  // 「高精度」ボタン
+  const radioHighAccuracy = document.getElementById("radioHighAccuracy")
+  radioHighAccuracy.addEventListener("click", () => {
+    transcription.loadModel("small", onProgressLoadModel)
   })
+
+  // const btnTranscribeElement = document.getElementById("btnTranscribe")
+  // btnTranscribeElement.addEventListener("click", async (e) => {
+  //   // 変換したオーディオファイルのblobUrl
+  //   const audioBlobUrl = transcode.getTranscodedBlobUrl()
+  //   await transcription.setAudio(audioBlobUrl)
+
+  //   const intervalID = setInterval(() => {
+  //     document.getElementById("progressTranscribe").value =
+  //       document.getElementById("progressTranscribe").value + 0.0001
+  //   }, 300)
+
+  //   const onProgressTranscription = (ratio, log) => {
+  //     document.getElementById("progressTranscribe").value = ratio
+  //     document.getElementById("logTranscription").value =
+  //       document.getElementById("logTranscription").value + "\n" + log
+  //     if (ratio >= 1) {
+  //       clearInterval(intervalID)
+  //       alert("文字起こし完了")
+  //     }
+  //   }
+  //   transcription.transcribe(onProgressTranscription)
+  //})
+
+  // const btnDownloadElement = document.getElementById("btnDownload")
+  // btnDownloadElement.addEventListener("click", () => {
+  //   transcription.download()
+  // })
 }
