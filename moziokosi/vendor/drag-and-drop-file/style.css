@@ -15,10 +15,6 @@
   --colorLinkHover: #77839c;
 }
 
-body {
-  margin: 24px;
-}
-
 .upload_dropZone {
   color: #0f3c4b;
   background-color: var(--colorPrimaryPale, #c8dadf);
