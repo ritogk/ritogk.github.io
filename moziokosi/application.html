@@ -104,30 +104,33 @@
     <div class="container">
       <section id="application" style="overflow: inherit">
         <div class="card p-3 rounded shadow">
+          <!-- AIモード -->
           <div class="mb-3">
             <h4>AIモード</h4>
-            <div class="d-flex flex-row gap-2">
-              <label class="radio">
-                <input type="radio" name="gender" value="designs" checked />
-                <span><i class="fa fa-truck-fast"></i> 高速</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="gender" value="FEMALE" />
-                <span><i class="fa fa-brain"></i> 高精度</span>
-              </label>
-            </div>
-            <div class="progress my-2" hidden>
-              <div
-                class="progress-bar progress-bar-striped w-75"
-                style="background-color: #5199bd !important"
-                role="progressbar"
-                aria-valuenow="75"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                ロード中
+            <form>
+              <div class="d-flex flex-row gap-2">
+                <label class="radio">
+                  <input type="radio" name="gender" value="designs" checked />
+                  <span><i class="fa fa-truck-fast"></i> 高速</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="gender" value="FEMALE" />
+                  <span><i class="fa fa-brain"></i> 高精度</span>
+                </label>
               </div>
-            </div>
+              <div class="progress my-2" hidden>
+                <div
+                  class="progress-bar progress-bar-striped w-75"
+                  style="background-color: #5199bd !important"
+                  role="progressbar"
+                  aria-valuenow="75"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  ロード中
+                </div>
+              </div>
+            </form>
           </div>
 
           <!-- file drag adn drop-->
@@ -203,56 +206,68 @@
           </div>
 
           <!-- 文字起こし -->
-          <div class="mt-3 d-flex flex-row gap-2">
-            <label class="radio">
-              <input type="button" name="gender" value="designs" />
-              <span
-                style="
-                  border-color: #0086c7;
-                  background-color: #0086c7;
-                  color: #fff;
-                "
-                ><i class="fa fa-file-audio"></i> 文字起こし</span
-              >
-            </label>
-          </div>
-          <div class="progress my-2" hidden>
+          <div class="mb-3">
+            <h4>文字起こし</h4>
+            <div class="mb-2">
+              <form>
+                <div class="d-flex flex-row gap-2">
+                  <label class="radio">
+                    <input type="button" name="gender" value="designs" />
+                    <span
+                      style="
+                        border-color: #0086c7;
+                        background-color: #0086c7;
+                        color: #fff;
+                      "
+                    >
+                      <div
+                        class="spinner-border text-light spinner-border-sm"
+                        role="status"
+                      >
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                      <i class="fa fa-file-audio"></i> 文字起こし開始</span
+                    >
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="gender" value="FEMALE" />
+                    <span
+                      style="
+                        border-color: #0086c7;
+                        background-color: #0086c7;
+                        color: #fff;
+                      "
+                    >
+                      <i class="fa fa-download"></i> ダウンロード</span
+                    >
+                  </label>
+                </div>
+              </form>
+            </div>
+
+            <!-- console log -->
             <div
-              class="progress-bar progress-bar-striped w-75"
-              style="background-color: #5199bd !important"
-              role="progressbar"
-              aria-valuenow="75"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
-          </div>
+              class="rounded border p-1"
+              style="
+                color: #6c757d;
+                background: #f3f5f7;
+                font-size: 0.875em;
+                height: 400px;
+              "
+            >
+              <p class="lh-sm">loading....<br />abcdefg</p>
+            </div>
 
-          <!-- ダウンロード -->
-          <div class="mt-3 d-flex flex-row gap-2">
-            <label class="radio">
-              <input type="button" name="gender" value="designs" />
-              <span
-                style="
-                  border-color: #0086c7;
-                  background-color: #0086c7;
-                  color: #fff;
-                "
-                ><i class="fa fa-download"></i> ダウンロード</span
-              >
-            </label>
-          </div>
-
-          <!-- console log -->
-          <div
-            class="rounded border p-1"
-            style="
-              color: #6c757d;
-              background: #f3f5f7;
-              font-size: 0.875em;
-              height: 400px;
-            "
-          >
-            <p class="lh-sm">loading....<br />abcdefg</p>
+            <div class="progress my-2" hidden>
+              <div
+                class="progress-bar progress-bar-striped w-75"
+                style="background-color: #5199bd !important"
+                role="progressbar"
+                aria-valuenow="75"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
           </div>
         </div>
       </section>
