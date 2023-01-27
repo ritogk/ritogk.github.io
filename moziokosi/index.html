@@ -94,57 +94,24 @@
     <header
       id="header"
       class="header fixed-top d-flex align-items-center"
-      style="display: none !important"
+      style="height: 60px"
     >
       <div class="container d-flex align-items-center justify-content-between">
         <a
           href="index.html"
           class="logo d-flex align-items-center me-auto me-lg-0"
         >
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.png" alt=""> -->
-          <h1>Yummy<span>.</span></h1>
+          <h1 style="font-size: 22px">おーぷんAI文字起こし</h1>
         </a>
 
         <nav id="navbar" class="navbar">
           <ul>
             <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#menu">Menu</a></li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#chefs">Chefs</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li class="dropdown">
-              <a href="#"
-                ><span>Drop Down</span>
-                <i class="bi bi-chevron-down dropdown-indicator"></i
-              ></a>
-              <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown">
-                  <a href="#"
-                    ><span>Deep Drop Down</span>
-                    <i class="bi bi-chevron-down dropdown-indicator"></i
-                  ></a>
-                  <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-              </ul>
-            </li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">今すぐ使う</a></li>
+            <li><a href="#contact">問い合わせ</a></li>
           </ul>
         </nav>
         <!-- .navbar -->
-
-        <a class="btn-book-a-table" href="#book-a-table">Book a Table</a>
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       </div>
@@ -152,28 +119,19 @@
     <!-- End Header -->
 
     <!-- ======= Hero Section ======= -->
-    <section
-      id="hero"
-      class="hero d-flex align-items-center section-bg"
-      style="display: none !important"
-    >
+    <section id="hero" class="hero d-flex align-items-center section-bg">
       <div class="container">
         <div class="row justify-content-between gy-5">
           <div
             class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start"
           >
-            <h2 data-aos="fade-up">Enjoy Your Healthy<br />Delicious Food</h2>
+            <h2 data-aos="fade-up">誰でも簡単で安全な高精度AI文字起こし</h2>
             <p data-aos="fade-up" data-aos-delay="100">
-              Sed autem laudantium dolores. Voluptatem itaque ea consequatur
-              eveniet. Eum quas beatae cumque eum quaerat.
+              簡単操作で最新の高精度AI文字起こしが行なえます。
+              音声や動画ファイルも外部に漏れないように、安全な仕組みで管理しているため、安心してご利用いただけます。
             </p>
             <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-              <a href="#book-a-table" class="btn-book-a-table">Book a Table</a>
-              <a
-                href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                class="glightbox btn-watch-video d-flex align-items-center"
-                ><i class="bi bi-play-circle"></i><span>Watch Video</span></a
-              >
+              <a href="#application" class="btn-book-a-table">今すぐ起動する</a>
             </div>
           </div>
           <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
@@ -191,137 +149,138 @@
     <!-- End Hero Section -->
 
     <main id="main">
-      <div class="container">
-        <p class="fs-5 text-center">おーぷんAI文字起こし</p>
-        <div class="mt-3 d-flex flex-row gap-2">
-          <label class="radio">
-            <input type="radio" name="gender" value="designs" checked />
-            <span><i class="fa fa-truck-fast"></i> 高速</span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="gender" value="FEMALE" />
-            <span><i class="fa fa-brain"></i> 高精度</span>
-          </label>
-        </div>
-        <div class="progress my-2">
-          <div
-            class="progress-bar progress-bar-striped w-75"
-            style="background-color: #5199bd !important"
-            role="progressbar"
-            aria-valuenow="75"
-            aria-valuemin="0"
-            aria-valuemax="100"
+      <section id="application">
+        <div class="container">
+          <div class="mt-3 d-flex flex-row gap-2">
+            <label class="radio">
+              <input type="radio" name="gender" value="designs" checked />
+              <span><i class="fa fa-truck-fast"></i> 高速</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="gender" value="FEMALE" />
+              <span><i class="fa fa-brain"></i> 高精度</span>
+            </label>
+          </div>
+          <div class="progress my-2">
+            <div
+              class="progress-bar progress-bar-striped w-75"
+              style="background-color: #5199bd !important"
+              role="progressbar"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              ロード中
+            </div>
+          </div>
+
+          <!-- file drag adn drop-->
+          <form>
+            <fieldset class="upload_dropZone text-center mb-3 p-4">
+              <legend class="visually-hidden">Image uploader</legend>
+
+              <svg class="upload_svg" width="60" height="60" aria-hidden="true">
+                <use href="#icon-imageUpload"></use>
+              </svg>
+
+              <p class="small my-2">
+                ここに動画または音声ファイルをドロップしてください。
+              </p>
+
+              <input
+                id="upload_image_background"
+                data-post-name="image_background"
+                data-post-url="https://someplace.com/image/uploads/backgrounds/"
+                class="position-absolute invisible"
+                type="file"
+                accept="image/jpeg, image/png, image/svg+xml"
+              />
+
+              <label class="btn btn-upload mb-3" for="upload_image_background"
+                >ファイルを選択</label
+              >
+
+              <div
+                class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"
+              ></div>
+            </fieldset>
+          </form>
+          <div class="progress my-2">
+            <div
+              class="progress-bar progress-bar-striped w-75"
+              style="background-color: #5199bd !important"
+              role="progressbar"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+
+          <!-- 言語選択 -->
+          <select
+            class="form-select"
+            id="single-select-field"
+            data-placeholder="文字起こしを行う言語を選択して下さい。"
           >
-            ロード中
+            <option></option>
+            <option>Ja</option>
+            <option>English</option>
+          </select>
+
+          <!-- 文字起こし -->
+          <div class="mt-3 d-flex flex-row gap-2">
+            <label class="radio">
+              <input type="button" name="gender" value="designs" />
+              <span
+                style="
+                  border-color: #0086c7;
+                  background-color: #0086c7;
+                  color: #fff;
+                "
+                ><i class="fa fa-file-audio"></i> 文字起こし</span
+              >
+            </label>
+          </div>
+          <div class="progress my-2">
+            <div
+              class="progress-bar progress-bar-striped w-75"
+              style="background-color: #5199bd !important"
+              role="progressbar"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+
+          <!-- ダウンロード -->
+          <div class="mt-3 d-flex flex-row gap-2">
+            <label class="radio">
+              <input type="button" name="gender" value="designs" />
+              <span
+                style="
+                  border-color: #0086c7;
+                  background-color: #0086c7;
+                  color: #fff;
+                "
+                ><i class="fa fa-download"></i> ダウンロード</span
+              >
+            </label>
+          </div>
+
+          <!-- console log -->
+          <div
+            class="rounded border p-1"
+            style="
+              color: #6c757d;
+              background: #f3f5f7;
+              font-size: 0.875em;
+              height: 400px;
+            "
+          >
+            <p class="lh-sm">loading....<br />abcdefg</p>
           </div>
         </div>
-
-        <!-- file drag adn drop-->
-        <form>
-          <fieldset class="upload_dropZone text-center mb-3 p-4">
-            <legend class="visually-hidden">Image uploader</legend>
-
-            <svg class="upload_svg" width="60" height="60" aria-hidden="true">
-              <use href="#icon-imageUpload"></use>
-            </svg>
-
-            <p class="small my-2">
-              ここに動画または音声ファイルをドロップしてください。
-            </p>
-
-            <input
-              id="upload_image_background"
-              data-post-name="image_background"
-              data-post-url="https://someplace.com/image/uploads/backgrounds/"
-              class="position-absolute invisible"
-              type="file"
-              accept="image/jpeg, image/png, image/svg+xml"
-            />
-
-            <label class="btn btn-upload mb-3" for="upload_image_background"
-              >ファイルを選択</label
-            >
-
-            <div
-              class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"
-            ></div>
-          </fieldset>
-        </form>
-        <div class="progress my-2">
-          <div
-            class="progress-bar progress-bar-striped w-75"
-            style="background-color: #5199bd !important"
-            role="progressbar"
-            aria-valuenow="75"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
-
-        <!-- 言語選択 -->
-        <select
-          class="form-select"
-          id="single-select-field"
-          data-placeholder="文字起こしを行う言語を選択して下さい。"
-        >
-          <option></option>
-          <option>Ja</option>
-          <option>English</option>
-        </select>
-
-        <!-- 文字起こし -->
-        <div class="mt-3 d-flex flex-row gap-2">
-          <label class="radio">
-            <input type="button" name="gender" value="designs" />
-            <span
-              style="
-                border-color: #0086c7;
-                background-color: #0086c7;
-                color: #fff;
-              "
-              ><i class="fa fa-file-audio"></i> 文字起こし</span
-            >
-          </label>
-        </div>
-        <div class="progress my-2">
-          <div
-            class="progress-bar progress-bar-striped w-75"
-            style="background-color: #5199bd !important"
-            role="progressbar"
-            aria-valuenow="75"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
-
-        <!-- ダウンロード -->
-        <div class="mt-3 d-flex flex-row gap-2">
-          <label class="radio">
-            <input type="button" name="gender" value="designs" />
-            <span
-              style="
-                border-color: #0086c7;
-                background-color: #0086c7;
-                color: #fff;
-              "
-              ><i class="fa fa-download"></i> ダウンロード</span
-            >
-          </label>
-        </div>
-
-        <!-- console log -->
-        <div
-          class="rounded border p-1"
-          style="
-            color: #6c757d;
-            background: #f3f5f7;
-            font-size: 0.875em;
-            height: 400px;
-          "
-        >
-          <p class="lh-sm">loading....<br />abcdefg</p>
-        </div>
-      </div>
+      </section>
 
       <svg style="display: none">
         <defs>
