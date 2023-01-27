@@ -1,7 +1,7 @@
 // Drag and drop - single or multiple image files
 // https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
 // https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
-window.onload = () => {
+const createDragAndDropFile = () => {
   const preventDefaults = (event) => {
     event.preventDefault()
     event.stopPropagation()

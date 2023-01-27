@@ -1,4 +1,4 @@
-window.onload = () => {
+const createSelect2 = () => {
   $("#single-select-field").select2({
     theme: "bootstrap-5",
     containerCssClass: "select2--medium", // For Select2 v4.0
