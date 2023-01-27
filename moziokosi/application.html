@@ -63,8 +63,25 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="./vendor/application/select2/script.js"></script>
 
-    <script>
+    <!-- whisper -->
+    <script
+      type="text/javascript"
+      src="./vendor/application/main/whisper/helpers.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="./vendor/application/main/whisper/main.js"
+    ></script>
+
+    <!-- ffmpeg -->
+    <script src="./vendor/application/main/ffmpeg/ffmpeg.min.js"></script>
+
+    <script type="module">
+      // whisperとffmpegの制御モジュール
+      import { startMain } from "./vendor/application/main/main.js"
       window.onload = () => {
+        startMain()
+        // デザイン系の前処理
         createSelect2()
         createDragAndDropFile()
       }

@@ -7,7 +7,7 @@ var module = Module
 // wasmのインスタス？
 var instance = null
 
-window.onload = async () => {
+export const startMain = async () => {
   const onProgressTranscode = (p) => {
     document.getElementById("ffmpegProgress").value = p.ratio
   }
