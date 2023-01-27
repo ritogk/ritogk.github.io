@@ -3,6 +3,7 @@
 // https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
 const createDragAndDropFile = () => {
   const preventDefaults = (event) => {
+    // ここの対策がいる
     event.preventDefault()
     event.stopPropagation()
   }
@@ -60,10 +61,11 @@ const createDragAndDropFile = () => {
     eventHandlers(zone)
   }
 
-  // No 'image/gif' or PDF or webp allowed here, but it's up to your use case.
-  // Double checks the input "accept" attribute
-  const isImageFile = (file) =>
-    ["image/jpeg", "image/png", "image/svg+xml"].includes(file.type)
+  const isImageFile = (file) => {
+    return ["audio/", "video/"].some((x) => {
+      return file.type.indexOf(x) === 0
+    })
+  }
 
   function previewFiles(dataRefs) {
     if (!dataRefs.gallery) return
@@ -97,22 +99,23 @@ const createDragAndDropFile = () => {
     const formData = new FormData()
     formData.append(name, dataRefs.files)
 
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("posted: ", data)
-        if (data.success === true) {
-          previewFiles(dataRefs)
-        } else {
-          console.log("URL: ", url, "  name: ", name)
-        }
-      })
-      .catch((error) => {
-        console.error("errored: ", error)
-      })
+    // // ここでファイルをアップロードしてる？
+    // fetch(url, {
+    //   method: "POST",
+    //   body: formData,
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log("posted: ", data)
+    //     if (data.success === true) {
+    //       previewFiles(dataRefs)
+    //     } else {
+    //       console.log("URL: ", url, "  name: ", name)
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("errored: ", error)
+    //   })
   }
 
   // Handle both selected and dropped files
@@ -122,7 +125,7 @@ const createDragAndDropFile = () => {
     // Remove unaccepted file types
     files = files.filter((item) => {
       if (!isImageFile(item)) {
-        console.log("Not an image, ", item.type)
+        console.log("Not an audio or video, ", item.type)
       }
       return isImageFile(item) ? item : null
     })

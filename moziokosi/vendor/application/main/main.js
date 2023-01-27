@@ -8,21 +8,29 @@ var module = Module
 var instance = null
 
 export const startMain = async () => {
-  const onProgressTranscode = (p) => {
-    document.getElementById("ffmpegProgress").value = p.ratio
+  const completeTranscode = () => {
+    console.log("完了")
   }
 
-  // document.getElementById("transcodeArea").style.display = "none"
-  // const completeTranscode = () => {
-  //   document.getElementById("transcodeArea").style.display = ""
-  // }
+  // AIモードのプログレスバー
+  const progressTranscodeElement = document.getElementById("progress-transcode")
+  const onProgressTranscode = function (p) {
+    if (p.ratio >= 1) {
+      progressTranscodeElement.style.display = "none"
+    } else {
+      progressTranscodeElement.style.display = "block"
+    }
+    progressTranscodeElement.children[0].style.width =
+      Math.round(100 * p.ratio) + "%"
+  }
 
-  // const transcode = new Transcode(
-  //   ffmpeg,
-  //   onProgressTranscode,
-  //   completeTranscode
-  // )
+  const transcode = new Transcode(
+    ffmpeg,
+    onProgressTranscode,
+    completeTranscode
+  )
 
+  // AIモードのプログレスバー
   const progressLoadModel = document.getElementById("progress-load-model")
   const onProgressLoadModel = function (ratio) {
     if (ratio >= 1) {

@@ -18,21 +18,22 @@ export class Transcode {
     this.#ffmpeg = createFFmpeg({
       log: true,
       logger: ({ message }) => {
-        txt.value += "\n" + message
+        //txt.value += "\n" + message
       },
     })
     this.#ffmpeg.setProgress(this.#onProgressTranscode)
-    const elm = document.getElementById("uploader")
+    const elm = document.getElementById("upload_image_background")
     elm.addEventListener("change", this.#transcode)
   }
 
   #transcode = async ({ target: { files } }) => {
-    const message = document.getElementById("message")
-    const { name } = files[0]
-    message.innerHTML = "ffmpegのロード"
+    // const message = document.getElementById("message")
+    const extension = files[0].name.split(".")[1]
+    const name = `file.${extension}`
+    // message.innerHTML = "ffmpegのロード"
     await this.#ffmpeg.load()
     this.#ffmpeg.FS("writeFile", name, await this.#fetchFile(files[0]))
-    message.innerHTML = "wavの16khzに変換中"
+    // message.innerHTML = "wavの16khzに変換中"
     await this.#ffmpeg.run(
       "-i",
       name,
@@ -45,7 +46,7 @@ export class Transcode {
       "output.wav"
     )
 
-    message.innerHTML = "完了"
+    // message.innerHTML = "完了"
     const data = this.#ffmpeg.FS("readFile", "output.wav")
 
     // メモリに保存されたblobにアクセスできるURLを作成
