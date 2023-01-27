@@ -17,16 +17,16 @@ label.radio span {
   padding: 12px 14px;
   width: 100%;
   text-align: center;
-  border: 2px solid #00b3bb;
+  border: 2px solid #697886;
   display: inline-block;
-  color: #00b3bb;
+  color: #697886;
   border-radius: 3px;
   text-transform: uppercase;
 }
 
 label.radio input:checked + span {
-  border-color: #00b3bb;
-  background-color: #00b3bb;
+  border-color: #697886;
+  background-color: #697886;
   color: #fff;
 }
 

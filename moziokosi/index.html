@@ -191,105 +191,136 @@
     <!-- End Hero Section -->
 
     <main id="main">
-      <p class="fs-5 text-center">文字起こしのモデル</p>
-      <div class="mt-3 d-flex flex-row gap-2">
-        <label class="radio">
-          <input type="radio" name="gender" value="designs" checked />
-          <span><i class="fa fa-truck-fast"></i> 高速</span>
-        </label>
-        <label class="radio">
-          <input type="radio" name="gender" value="FEMALE" />
-          <span><i class="fa fa-brain"></i> 高精度</span>
-        </label>
-      </div>
-      <div class="progress my-2">
-        <div
-          class="progress-bar progress-bar-striped w-75"
-          style="background-color: #5199bd !important"
-          role="progressbar"
-          aria-valuenow="75"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          ロード中
+      <div class="container">
+        <p class="fs-5 text-center">文字起こしのモデル</p>
+        <div class="mt-3 d-flex flex-row gap-2">
+          <label class="radio">
+            <input type="radio" name="gender" value="designs" checked />
+            <span><i class="fa fa-truck-fast"></i> 高速</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="gender" value="FEMALE" />
+            <span><i class="fa fa-brain"></i> 高精度</span>
+          </label>
         </div>
-      </div>
-
-      <!-- file drag adn drop-->
-      <form>
-        <fieldset class="upload_dropZone text-center mb-3 p-4">
-          <legend class="visually-hidden">Image uploader</legend>
-
-          <svg class="upload_svg" width="60" height="60" aria-hidden="true">
-            <use href="#icon-imageUpload"></use>
-          </svg>
-
-          <p class="small my-2">
-            ここに動画または音声ファイルをドロップしてください。
-          </p>
-
-          <input
-            id="upload_image_background"
-            data-post-name="image_background"
-            data-post-url="https://someplace.com/image/uploads/backgrounds/"
-            class="position-absolute invisible"
-            type="file"
-            accept="image/jpeg, image/png, image/svg+xml"
-          />
-
-          <label class="btn btn-upload mb-3" for="upload_image_background"
-            >ファイルを選択</label
-          >
-
+        <div class="progress my-2">
           <div
-            class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"
-          ></div>
-        </fieldset>
-      </form>
-      <div class="progress my-2">
-        <div
-          class="progress-bar progress-bar-striped w-75"
-          style="background-color: #00b3bb !important"
-          role="progressbar"
-          aria-valuenow="75"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
-      </div>
-
-      <!-- 言語選択 -->
-      <select
-        class="form-select"
-        id="single-select-field"
-        data-placeholder="文字起こしを行う言語を選択して下さい。"
-      >
-        <option></option>
-        <option>Ja</option>
-        <option>English</option>
-      </select>
-
-      <div class="mt-3 d-flex flex-row gap-2">
-        <label class="radio">
-          <input type="button" name="gender" value="designs" />
-          <span
-            style="
-              border-color: #3d91ff;
-              background-color: #3d91ff;
-              color: #fff;
-            "
-            ><i class="fa fa-file-audio"></i> 文字起こし</span
+            class="progress-bar progress-bar-striped w-75"
+            style="background-color: #5199bd !important"
+            role="progressbar"
+            aria-valuenow="75"
+            aria-valuemin="0"
+            aria-valuemax="100"
           >
-        </label>
-      </div>
-      <div class="progress my-2">
+            ロード中
+          </div>
+        </div>
+
+        <!-- file drag adn drop-->
+        <form>
+          <fieldset class="upload_dropZone text-center mb-3 p-4">
+            <legend class="visually-hidden">Image uploader</legend>
+
+            <svg class="upload_svg" width="60" height="60" aria-hidden="true">
+              <use href="#icon-imageUpload"></use>
+            </svg>
+
+            <p class="small my-2">
+              ここに動画または音声ファイルをドロップしてください。
+            </p>
+
+            <input
+              id="upload_image_background"
+              data-post-name="image_background"
+              data-post-url="https://someplace.com/image/uploads/backgrounds/"
+              class="position-absolute invisible"
+              type="file"
+              accept="image/jpeg, image/png, image/svg+xml"
+            />
+
+            <label class="btn btn-upload mb-3" for="upload_image_background"
+              >ファイルを選択</label
+            >
+
+            <div
+              class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"
+            ></div>
+          </fieldset>
+        </form>
+        <div class="progress my-2">
+          <div
+            class="progress-bar progress-bar-striped w-75"
+            style="background-color: #5199bd !important"
+            role="progressbar"
+            aria-valuenow="75"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+
+        <!-- 言語選択 -->
+        <select
+          class="form-select"
+          id="single-select-field"
+          data-placeholder="文字起こしを行う言語を選択して下さい。"
+        >
+          <option></option>
+          <option>Ja</option>
+          <option>English</option>
+        </select>
+
+        <!-- 文字起こし -->
+        <div class="mt-3 d-flex flex-row gap-2">
+          <label class="radio">
+            <input type="button" name="gender" value="designs" />
+            <span
+              style="
+                border-color: #0086c7;
+                background-color: #0086c7;
+                color: #fff;
+              "
+              ><i class="fa fa-file-audio"></i> 文字起こし</span
+            >
+          </label>
+        </div>
+        <div class="progress my-2">
+          <div
+            class="progress-bar progress-bar-striped w-75"
+            style="background-color: #0086c7 !important"
+            role="progressbar"
+            aria-valuenow="75"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+
+        <!-- ダウンロード -->
+        <div class="mt-3 d-flex flex-row gap-2">
+          <label class="radio">
+            <input type="button" name="gender" value="designs" />
+            <span
+              style="
+                border-color: #0086c7;
+                background-color: #0086c7;
+                color: #fff;
+              "
+              ><i class="fa fa-download"></i> ダウンロード</span
+            >
+          </label>
+        </div>
+
+        <!-- console log -->
         <div
-          class="progress-bar progress-bar-striped w-75"
-          style="background-color: #3d91ff !important"
-          role="progressbar"
-          aria-valuenow="75"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
+          class="rounded border p-1"
+          style="
+            color: #6c757d;
+            background: #f3f5f7;
+            font-size: 0.875em;
+            height: 400px;
+          "
+        >
+          <p class="lh-sm">loading....<br />abcdefg</p>
+        </div>
       </div>
 
       <svg style="display: none">

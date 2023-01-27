@@ -1,18 +1,18 @@
 /* Bootstrap 5 CSS and icons included */
 :root {
-  --colorPrimaryNormal: #00b3bb;
-  --colorPrimaryDark: #00979f;
-  --colorPrimaryGlare: #00cdd7;
-  --colorPrimaryHalf: #80d9dd;
-  --colorPrimaryQuarter: #bfecee;
-  --colorPrimaryEighth: #dff5f7;
+  --colorPrimaryNormal: #697886;
+  --colorPrimaryDark: #586173;
+  --colorPrimaryGlare: #77839c;
+  --colorPrimaryHalf: #b4b9c4;
+  --colorPrimaryQuarter: #d9dce1;
+  --colorPrimaryEighth: #ececf0;
   --colorPrimaryPale: #f3f5f7;
   --colorPrimarySeparator: #f3f5f7;
-  --colorPrimaryOutline: #dff5f7;
-  --colorButtonNormal: #00b3bb;
-  --colorButtonHover: #00cdd7;
-  --colorLinkNormal: #00979f;
-  --colorLinkHover: #00cdd7;
+  --colorPrimaryOutline: #ececf0;
+  --colorButtonNormal: #697886;
+  --colorButtonHover: #77839c;
+  --colorLinkNormal: #586173;
+  --colorLinkHover: #77839c;
 }
 
 body {
