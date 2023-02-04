@@ -68,7 +68,7 @@ export const startMain = async () => {
   // メディアファイル変換用のプログレスバー
   const progressTranscodeElement = document.getElementById("progress-transcode")
   const onProgressTranscode = function (p) {
-    if (p.ratio >= 1) {
+    if (p.ratio >= 0.985) {
       progressTranscodeElement.style.display = "none"
     } else {
       progressTranscodeElement.style.display = "block"
@@ -111,7 +111,8 @@ export const startMain = async () => {
 
       document.getElementById("logTranscription").innerText =
         document.getElementById("logTranscription").innerText + "\n" + log
-      if (ratio >= 1) {
+      // 0.993とかで終了する場合があるので余裕を持たせる。
+      if (ratio >= 0.985) {
         clearInterval(intervalID)
         progressTranscriptionElement.style.display = "none"
         completedTranscribe = true
