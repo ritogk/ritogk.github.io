@@ -8,10 +8,38 @@ var module = Module
 var instance = null
 
 export const startMain = async () => {
+  // メディアファイル変換モジュール
+  const transcription = new Transcription(module, instance)
+
+  // 【AIモード】
+  // モデルロード時のプログレスバー
+  const progressLoadModel = document.getElementById("progress-load-model")
+  const onProgressLoadModel = function (ratio) {
+    debugger
+    if (ratio >= 1) {
+      progressLoadModel.style.display = "none"
+    } else {
+      progressLoadModel.style.display = "block"
+    }
+    progressLoadModel.children[0].style.width = Math.round(100 * ratio) + "%"
+  }
+  // 初期モデル
+  transcription.loadModel("base", onProgressLoadModel)
+  // 「高速」ボタン
+  const radioHighSpeed = document.getElementById("radioHighSpeed")
+  radioHighSpeed.addEventListener("click", () => {
+    transcription.loadModel("base", onProgressLoadModel)
+  })
+  // 「高精度」ボタン
+  const radioHighAccuracy = document.getElementById("radioHighAccuracy")
+  radioHighAccuracy.addEventListener("click", () => {
+    transcription.loadModel("small", onProgressLoadModel)
+  })
+
+  // 【メディアファイル変換】
   const completeTranscode = () => {
     console.log("完了")
   }
-
   // メディアファイル変換用のプログレスバー
   const progressTranscodeElement = document.getElementById("progress-transcode")
   const onProgressTranscode = function (p) {
@@ -24,41 +52,14 @@ export const startMain = async () => {
       Math.round(100 * p.ratio) + "%"
   }
 
+  // 文字起こしモジュール
   const transcode = new Transcode(
     ffmpeg,
     onProgressTranscode,
     completeTranscode
   )
 
-  // モデルロード時のプログレスバー
-  const progressLoadModel = document.getElementById("progress-load-model")
-  const onProgressLoadModel = function (ratio) {
-    debugger
-    if (ratio >= 1) {
-      progressLoadModel.style.display = "none"
-    } else {
-      progressLoadModel.style.display = "block"
-    }
-    progressLoadModel.children[0].style.width = Math.round(100 * ratio) + "%"
-  }
-
-  const transcription = new Transcription(module, instance)
-
-  // 初期モデル
-  transcription.loadModel("base", onProgressLoadModel)
-
-  // 「高速」ボタン
-  const radioHighSpeed = document.getElementById("radioHighSpeed")
-  radioHighSpeed.addEventListener("click", () => {
-    transcription.loadModel("base", onProgressLoadModel)
-  })
-
-  // 「高精度」ボタン
-  const radioHighAccuracy = document.getElementById("radioHighAccuracy")
-  radioHighAccuracy.addEventListener("click", () => {
-    transcription.loadModel("small", onProgressLoadModel)
-  })
-
+  // 【文字起こし】
   const btnTranscribeElement = document.getElementById("btnTranscribe")
   btnTranscribeElement.addEventListener("click", async (e) => {
     // 変換したオーディオファイルのblobUrl
@@ -82,7 +83,6 @@ export const startMain = async () => {
       progressTranscriptionElement.children[0].style.width =
         Math.round(100 * ratio) + "%"
 
-      // progressTranscriptionElement.value = ratio
       document.getElementById("logTranscription").innerText =
         document.getElementById("logTranscription").innerText + "\n" + log
       if (ratio >= 1) {
