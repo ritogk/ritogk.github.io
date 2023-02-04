@@ -30,4 +30,9 @@ label.radio input:checked + span {
   color: #fff;
 }
 
+.disabled {
+  opacity: 0.4;
+  cursor: default !important;
+}
+
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");

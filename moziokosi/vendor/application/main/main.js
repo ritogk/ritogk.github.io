@@ -8,6 +8,18 @@ var module = Module
 var instance = null
 
 export const startMain = async () => {
+  // 制御フラグ
+  let completedLoadModel = false
+  let completedTranscode = false
+  let completedTranscribe = false
+
+  // ボタンを非活性にする
+  const btnTranscribeAreaElement =
+    document.getElementById("btnTranscribe").parentElement
+  btnTranscribeAreaElement.classList.add("disabled")
+  const btnDownload = document.getElementById("btnDownload").parentElement
+  btnDownload.classList.add("disabled")
+
   // メディアファイル変換モジュール
   const transcription = new Transcription(module, instance)
 
@@ -15,29 +27,37 @@ export const startMain = async () => {
   // モデルロード時のプログレスバー
   const progressLoadModel = document.getElementById("progress-load-model")
   const onProgressLoadModel = function (ratio) {
-    debugger
-    if (ratio >= 1) {
-      progressLoadModel.style.display = "none"
-    } else {
-      progressLoadModel.style.display = "block"
-    }
+    progressLoadModel.style.display = "block"
     progressLoadModel.children[0].style.width = Math.round(100 * ratio) + "%"
   }
+  // モデールロード後のコールバック関数
+  const completeFunc = () => {
+    progressLoadModel.style.display = "none"
+    completedLoadModel = true
+    if (completedLoadModel && completedTranscode) {
+      btnTranscribeAreaElement.classList.remove("disabled")
+    }
+  }
+
   // 初期モデル
-  transcription.loadModel("base", onProgressLoadModel)
+  transcription.loadModel("base", onProgressLoadModel, completeFunc)
   // 「高速」ボタン
   const radioHighSpeed = document.getElementById("radioHighSpeed")
   radioHighSpeed.addEventListener("click", () => {
-    transcription.loadModel("base", onProgressLoadModel)
+    transcription.loadModel("base", onProgressLoadModel, completeFunc)
   })
   // 「高精度」ボタン
   const radioHighAccuracy = document.getElementById("radioHighAccuracy")
   radioHighAccuracy.addEventListener("click", () => {
-    transcription.loadModel("small", onProgressLoadModel)
+    transcription.loadModel("small", onProgressLoadModel, completeFunc)
   })
 
   // 【メディアファイル変換】
   const completeTranscode = () => {
+    completedTranscode = true
+    if (completedLoadModel && completedTranscode) {
+      btnTranscribeAreaElement.classList.remove("disabled")
+    }
     console.log("完了")
   }
   // メディアファイル変換用のプログレスバー
@@ -88,7 +108,7 @@ export const startMain = async () => {
       if (ratio >= 1) {
         clearInterval(intervalID)
         progressTranscriptionElement.style.display = "none"
-        alert("文字起こし完了")
+        completedTranscribe = true
       }
     }
 

@@ -9,7 +9,7 @@ var Module = {
   monitorRunDependencies: function (left) {},
 }
 
-storeFS = (fname, buf) => {
+storeFS = (fname, buf, completedFunc) => {
   // write to WASM file using FS_createDataFile
   // if the file exists, delete it
   try {
@@ -26,6 +26,8 @@ storeFS = (fname, buf) => {
   //   'loaded "' + model_whisper + '"!'
 
   printTextarea("storeFS: stored model: " + fname + " size: " + buf.length)
+  // 完了処理
+  completedFunc()
 }
 
 // web audio context
@@ -168,7 +170,16 @@ async function fetchRemote(url, cbProgress, cbPrint) {
 // load remote data
 // - check if the data is already in the IndexedDB
 // - if not, fetch it from the remote URL and store it in the IndexedDB
-function loadRemote(url, dst, size_mb, onProgress, cbReady, cbCancel, cbPrint) {
+function loadRemote(
+  url,
+  dst,
+  size_mb,
+  onProgress,
+  cbReady,
+  cbCancel,
+  cbPrint,
+  completeFunc
+) {
   if (!onProgress) {
     onProgress = window.cbProgress
   }
@@ -216,9 +227,10 @@ function loadRemote(url, dst, size_mb, onProgress, cbReady, cbCancel, cbPrint) {
 
     rq.onsuccess = function (event) {
       if (rq.result) {
+        // ★モデルを強制的に更新
         // if (false) {
         cbPrint('loadRemote: "' + url + '" is already in the IndexedDB')
-        cbReady(dst, rq.result)
+        cbReady(dst, rq.result, completeFunc)
       } else {
         // data is not in the IndexedDB
         cbPrint('loadRemote: "' + url + '" is not in the IndexedDB')
@@ -235,7 +247,7 @@ function loadRemote(url, dst, size_mb, onProgress, cbReady, cbCancel, cbPrint) {
 
               rq.onsuccess = function (event) {
                 cbPrint('loadRemote: "' + url + '" stored in the IndexedDB')
-                cbReady(dst, data)
+                cbReady(dst, data, completeFunc)
               }
 
               rq.onerror = function (event) {
