@@ -77,15 +77,18 @@ const createDragAndDropFile = () => {
     dataRefs.gallery.innerHTML = ""
 
     for (const file of dataRefs.files) {
-      let reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onloadend = function () {
-        let img = document.createElement("img")
-        img.className = "upload_img mt-2"
-        img.setAttribute("alt", file.name)
-        img.src = reader.result
-        dataRefs.gallery.appendChild(img)
+      const span = document.createElement("span")
+      const i = document.createElement("i")
+      i.style.marginRight = "5px"
+      span.innerText = file.name
+      debugger
+      if (file.type.indexOf("audio/") !== -1) {
+        i.classList.add("fa", "fa-file-audio")
+      } else if (file.type.indexOf("video/") !== -1) {
+        i.classList.add("fa", "fa-file-video")
       }
+      span.prepend(i)
+      dataRefs.gallery.appendChild(span)
     }
   }
 
