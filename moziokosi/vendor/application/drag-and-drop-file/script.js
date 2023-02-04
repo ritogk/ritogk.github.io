@@ -81,7 +81,6 @@ const createDragAndDropFile = () => {
       const i = document.createElement("i")
       i.style.marginRight = "5px"
       span.innerText = file.name
-      debugger
       if (file.type.indexOf("audio/") !== -1) {
         i.classList.add("fa", "fa-file-audio")
       } else if (file.type.indexOf("video/") !== -1) {
