@@ -51,7 +51,7 @@ export class Transcription {
     })
   }
 
-  transcribe = async (callbackFuncOnProgress) => {
+  transcribe = async (callbackFuncOnProgress, language) => {
     const translate = false
     if (!this.#instance) {
       this.#instance = this.#module.init("whisper.bin")
@@ -81,7 +81,7 @@ export class Transcription {
         var ret = this.#module.full_default(
           this.#instance,
           this.#audio,
-          document.getElementById("language").value,
+          language,
           translate
         )
         console.log("js: full_default returned: " + ret)

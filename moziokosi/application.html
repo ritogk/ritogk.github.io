@@ -160,7 +160,7 @@
                   aria-valuemin="0"
                   aria-valuemax="100"
                 >
-                  Loading...
+                  読み込み中...
                 </div>
               </div>
             </form>
@@ -212,7 +212,7 @@
                 aria-valuemin="0"
                 aria-valuemax="100"
               >
-                Loading...
+                処理中...
               </div>
             </div>
 
@@ -236,12 +236,11 @@
             <h4>音声ファイルの言語</h4>
             <select
               class="form-select"
-              id="single-select-field"
+              id="language"
               data-placeholder="言語を選択して下さい。"
             >
-              <option></option>
-              <option>Japanese</option>
-              <option>English</option>
+              <option value="ja" checked>Japanese</option>
+              <option value="en">English</option>
             </select>
           </div>
 
@@ -252,7 +251,12 @@
               <form>
                 <div class="d-flex flex-row gap-2">
                   <label class="radio">
-                    <input type="button" name="gender" value="designs" />
+                    <input
+                      type="button"
+                      id="btnTranscribe"
+                      name="gender"
+                      value="designs"
+                    />
                     <span
                       style="
                         border-color: #0086c7;
@@ -285,6 +289,24 @@
               </form>
             </div>
 
+            <!-- プログレスバー -->
+            <div
+              id="progressTranscription"
+              class="progress my-2"
+              style="display: none"
+            >
+              <div
+                class="progress-bar progress-bar-striped"
+                style="background-color: #5199bd !important; width: 0%"
+                role="progressbar"
+                aria-valuenow="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                処理中...
+              </div>
+            </div>
+
             <!-- console log -->
             <div
               class="rounded border p-1"
@@ -295,7 +317,7 @@
                 height: 400px;
               "
             >
-              <p class="lh-sm">loading....<br />abcdefg</p>
+              <p class="lh-sm" id="logTranscription"></p>
             </div>
 
             <div class="progress my-2" hidden>

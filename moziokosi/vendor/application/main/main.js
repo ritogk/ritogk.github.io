@@ -12,7 +12,7 @@ export const startMain = async () => {
     console.log("完了")
   }
 
-  // AIモードのプログレスバー
+  // メディアファイル変換用のプログレスバー
   const progressTranscodeElement = document.getElementById("progress-transcode")
   const onProgressTranscode = function (p) {
     if (p.ratio >= 1) {
@@ -30,9 +30,10 @@ export const startMain = async () => {
     completeTranscode
   )
 
-  // AIモードのプログレスバー
+  // モデルロード時のプログレスバー
   const progressLoadModel = document.getElementById("progress-load-model")
   const onProgressLoadModel = function (ratio) {
+    debugger
     if (ratio >= 1) {
       progressLoadModel.style.display = "none"
     } else {
@@ -41,15 +42,6 @@ export const startMain = async () => {
     progressLoadModel.children[0].style.width = Math.round(100 * ratio) + "%"
   }
 
-  // const onProgressLoadModel = (ratio) => {
-  //   document.getElementById("progressTranscribe").value = ratio
-  //   document.getElementById("logTranscription").value =
-  //     document.getElementById("logTranscription").value + "\n" + log
-  //   if (ratio >= 1) {
-  //     clearInterval(intervalID)
-  //     alert("文字起こし完了")
-  //   }
-  // }
   const transcription = new Transcription(module, instance)
 
   // 初期モデル
@@ -67,28 +59,45 @@ export const startMain = async () => {
     transcription.loadModel("small", onProgressLoadModel)
   })
 
-  // const btnTranscribeElement = document.getElementById("btnTranscribe")
-  // btnTranscribeElement.addEventListener("click", async (e) => {
-  //   // 変換したオーディオファイルのblobUrl
-  //   const audioBlobUrl = transcode.getTranscodedBlobUrl()
-  //   await transcription.setAudio(audioBlobUrl)
+  const btnTranscribeElement = document.getElementById("btnTranscribe")
+  btnTranscribeElement.addEventListener("click", async (e) => {
+    // 変換したオーディオファイルのblobUrl
+    const audioBlobUrl = transcode.getTranscodedBlobUrl()
+    await transcription.setAudio(audioBlobUrl)
 
-  //   const intervalID = setInterval(() => {
-  //     document.getElementById("progressTranscribe").value =
-  //       document.getElementById("progressTranscribe").value + 0.0001
-  //   }, 300)
+    const progressTranscriptionElement = document.getElementById(
+      "progressTranscription"
+    )
 
-  //   const onProgressTranscription = (ratio, log) => {
-  //     document.getElementById("progressTranscribe").value = ratio
-  //     document.getElementById("logTranscription").value =
-  //       document.getElementById("logTranscription").value + "\n" + log
-  //     if (ratio >= 1) {
-  //       clearInterval(intervalID)
-  //       alert("文字起こし完了")
-  //     }
-  //   }
-  //   transcription.transcribe(onProgressTranscription)
-  //})
+    const intervalID = setInterval(() => {
+      progressTranscriptionElement.children[0].style.width =
+        Number(
+          progressTranscriptionElement.children[0].style.width.replace("%", "")
+        ) +
+        0.01 +
+        "%"
+    }, 300)
+
+    const onProgressTranscription = (ratio, log) => {
+      progressTranscriptionElement.children[0].style.width =
+        Math.round(100 * ratio) + "%"
+
+      // progressTranscriptionElement.value = ratio
+      document.getElementById("logTranscription").innerText =
+        document.getElementById("logTranscription").innerText + "\n" + log
+      if (ratio >= 1) {
+        clearInterval(intervalID)
+        progressTranscriptionElement.style.display = "none"
+        alert("文字起こし完了")
+      }
+    }
+
+    progressTranscriptionElement.style.display = "block"
+    transcription.transcribe(
+      onProgressTranscription,
+      document.getElementById("language").value
+    )
+  })
 
   // const btnDownloadElement = document.getElementById("btnDownload")
   // btnDownloadElement.addEventListener("click", () => {
