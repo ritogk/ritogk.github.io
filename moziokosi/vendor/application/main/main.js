@@ -17,8 +17,9 @@ export const startMain = async () => {
   const btnTranscribeAreaElement =
     document.getElementById("btnTranscribe").parentElement
   btnTranscribeAreaElement.classList.add("disabled")
-  const btnDownload = document.getElementById("btnDownload").parentElement
-  btnDownload.classList.add("disabled")
+  const btnDownloadAreaElement =
+    document.getElementById("btnDownload").parentElement
+  btnDownloadAreaElement.classList.add("disabled")
 
   // メディアファイル変換モジュール
   const transcription = new Transcription(module, instance)
@@ -109,6 +110,8 @@ export const startMain = async () => {
         clearInterval(intervalID)
         progressTranscriptionElement.style.display = "none"
         completedTranscribe = true
+        btnDownloadAreaElement.classList.remove("disabled")
+        alert("文字起こしが完了しました。")
       }
     }
 
