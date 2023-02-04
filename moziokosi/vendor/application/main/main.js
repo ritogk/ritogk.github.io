@@ -21,6 +21,10 @@ export const startMain = async () => {
     document.getElementById("btnDownload").parentElement
   btnDownloadAreaElement.classList.add("disabled")
 
+  // 文字起こし開始ボタンのスピナーを非表示にする
+  const spinnerTranscribe = document.getElementById("spinnerTranscribe")
+  spinnerTranscribe.style.display = "none"
+
   // メディアファイル変換モジュール
   const transcription = new Transcription(module, instance)
 
@@ -83,6 +87,7 @@ export const startMain = async () => {
   // 【文字起こし】
   const btnTranscribeElement = document.getElementById("btnTranscribe")
   btnTranscribeElement.addEventListener("click", async (e) => {
+    spinnerTranscribe.style.display = ""
     // 変換したオーディオファイルのblobUrl
     const audioBlobUrl = transcode.getTranscodedBlobUrl()
     await transcription.setAudio(audioBlobUrl)
@@ -111,6 +116,7 @@ export const startMain = async () => {
         progressTranscriptionElement.style.display = "none"
         completedTranscribe = true
         btnDownloadAreaElement.classList.remove("disabled")
+        spinnerTranscribe.style.display = "none"
         alert("文字起こしが完了しました。")
       }
     }
