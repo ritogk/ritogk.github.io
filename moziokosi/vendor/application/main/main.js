@@ -99,8 +99,9 @@ export const startMain = async () => {
     )
   })
 
-  // const btnDownloadElement = document.getElementById("btnDownload")
-  // btnDownloadElement.addEventListener("click", () => {
-  //   transcription.download()
-  // })
+  //【文字起こし済ファイルのダウンロード】
+  const btnDownloadElement = document.getElementById("btnDownload")
+  btnDownloadElement.addEventListener("click", () => {
+    transcription.download()
+  })
 }
