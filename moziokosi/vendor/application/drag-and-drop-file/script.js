@@ -3,8 +3,9 @@
 // https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
 const createDragAndDropFile = () => {
   const preventDefaults = (event) => {
-    // ここの対策がいる
+    // ブラウザの規定の動きを止める
     event.preventDefault()
+    // イベントの伝達を止める
     event.stopPropagation()
   }
 
@@ -22,7 +23,10 @@ const createDragAndDropFile = () => {
   const handleDrop = (event) => {
     const dataRefs = getInputAndGalleryRefs(event.target)
     dataRefs.files = event.dataTransfer.files
-    handleFiles(dataRefs)
+    // ドラッグしたファイルをfileに突っ込む
+    dataRefs.input.files = dataRefs.files
+    // つっこんだだけだとイベントが発火しないので発火
+    dataRefs.input.dispatchEvent(new Event("change"))
   }
 
   const eventHandlers = (zone) => {
@@ -85,43 +89,9 @@ const createDragAndDropFile = () => {
     }
   }
 
-  // Based on: https://flaviocopes.com/how-to-upload-files-fetch/
-  const imageUpload = (dataRefs) => {
-    // Multiple source routes, so double check validity
-    if (!dataRefs.files || !dataRefs.input) return
-
-    const url = dataRefs.input.getAttribute("data-post-url")
-    if (!url) return
-
-    const name = dataRefs.input.getAttribute("data-post-name")
-    if (!name) return
-
-    const formData = new FormData()
-    formData.append(name, dataRefs.files)
-
-    // // ここでファイルをアップロードしてる？
-    // fetch(url, {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("posted: ", data)
-    //     if (data.success === true) {
-    //       previewFiles(dataRefs)
-    //     } else {
-    //       console.log("URL: ", url, "  name: ", name)
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("errored: ", error)
-    //   })
-  }
-
   // Handle both selected and dropped files
   const handleFiles = (dataRefs) => {
     let files = [...dataRefs.files]
-
     // Remove unaccepted file types
     files = files.filter((item) => {
       if (!isImageFile(item)) {
@@ -134,6 +104,5 @@ const createDragAndDropFile = () => {
     dataRefs.files = files
 
     previewFiles(dataRefs)
-    imageUpload(dataRefs)
   }
 }
