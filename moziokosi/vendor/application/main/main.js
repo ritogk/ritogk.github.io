@@ -117,7 +117,7 @@ export const startMain = async () => {
         Math.round(100 * ratio) + "%"
 
       document.getElementById("logTranscription").innerText =
-        document.getElementById("logTranscription").innerText + "\n" + log
+        document.getElementById("logTranscription").innerText + log + "\n"
 
       // 1 / ratio * かかった時間 = 残り時間(s)
       const timeLeft = Math.floor(
