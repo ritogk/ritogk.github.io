@@ -295,21 +295,23 @@
               </form>
             </div>
 
-            <!-- プログレスバー -->
-            <div
-              id="progressTranscription"
-              class="progress my-2"
-              style="display: none"
-            >
-              <div
-                class="progress-bar progress-bar-striped"
-                style="background-color: #5199bd !important; width: 0%"
-                role="progressbar"
-                aria-valuenow="0"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                処理中...
+            <div id="progressTranscriptionArea" style="display: none">
+              <div id="progressTranscription" class="progress my-2">
+                <div
+                  class="progress-bar progress-bar-striped"
+                  style="background-color: #5199bd !important; width: 0%"
+                  role="progressbar"
+                  aria-valuenow="0"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  処理中...
+                </div>
+              </div>
+
+              <div>
+                <span>残りおよそ: </span>
+                <span id="progressTranscriptionTimeLeft">??時間??分??秒</span>
               </div>
             </div>
 

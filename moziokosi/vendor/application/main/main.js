@@ -85,6 +85,7 @@ export const startMain = async () => {
   )
 
   // 【文字起こし】
+  const transcribeStartTime = Date.now()
   const btnTranscribeElement = document.getElementById("btnTranscribe")
   btnTranscribeElement.addEventListener("click", async (e) => {
     spinnerTranscribe.style.display = ""
@@ -92,8 +93,14 @@ export const startMain = async () => {
     const audioBlobUrl = transcode.getTranscodedBlobUrl()
     await transcription.setAudio(audioBlobUrl)
 
+    const progressTranscriptionAreaElement = document.getElementById(
+      "progressTranscriptionArea"
+    )
     const progressTranscriptionElement = document.getElementById(
       "progressTranscription"
+    )
+    const progressTranscriptionTimeLeftElement = document.getElementById(
+      "progressTranscriptionTimeLeft"
     )
 
     const intervalID = setInterval(() => {
@@ -111,18 +118,32 @@ export const startMain = async () => {
 
       document.getElementById("logTranscription").innerText =
         document.getElementById("logTranscription").innerText + "\n" + log
-      // 0.993とかで終了する場合があるので余裕を持たせる。
+
+      // 1 / ratio * かかった時間 = 残り時間(s)
+      const timeLeft = Math.floor(
+        (1 / ratio) * ((Date.now() - transcribeStartTime) / 1000)
+      )
+      let hour = Math.floor(timeLeft / 3600)
+      let minutes = Math.floor((timeLeft % 3600) / 60)
+      let seconds = timeLeft % 60
+      progressTranscriptionTimeLeftElement.innerText =
+        (hour == 0 ? "" : `${hour}時間`) +
+        (minutes == 0 ? "" : `${minutes}分`) +
+        (seconds == 0 ? "" : `${seconds}秒`)
+
+      // 完了判定 ※0.993とかで終了する場合があるので余裕を持たせる。
       if (ratio >= 0.985) {
         clearInterval(intervalID)
-        progressTranscriptionElement.style.display = "none"
+        progressTranscriptionAreaElement.style.display = "none"
         completedTranscribe = true
         btnDownloadAreaElement.classList.remove("disabled")
         spinnerTranscribe.style.display = "none"
+        progressTranscriptionTimeLeftElement.innerText = "??時間??分??秒"
         alert("文字起こしが完了しました。")
       }
     }
 
-    progressTranscriptionElement.style.display = "block"
+    progressTranscriptionAreaElement.style.display = "block"
     transcription.transcribe(
       onProgressTranscription,
       document.getElementById("language").value
