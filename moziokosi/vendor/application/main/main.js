@@ -112,6 +112,16 @@ export const startMain = async () => {
         "%"
     }, 300)
 
+    const completeTranscribe = () => {
+      clearInterval(intervalID)
+      progressTranscriptionAreaElement.style.display = "none"
+      completedTranscribe = true
+      btnDownloadAreaElement.classList.remove("disabled")
+      spinnerTranscribe.style.display = "none"
+      progressTranscriptionTimeLeftElement.innerText = "??時間??分??秒"
+      alert("文字起こしが完了しました。")
+    }
+
     const onProgressTranscription = (ratio, log) => {
       progressTranscriptionElement.children[0].style.width =
         Math.round(100 * ratio) + "%"
@@ -130,22 +140,12 @@ export const startMain = async () => {
         (hour == 0 ? "" : `${hour}時間`) +
         (minutes == 0 ? "" : `${minutes}分`) +
         (seconds == 0 ? "" : `${seconds}秒`)
-
-      // 完了判定 ※0.993とかで終了する場合があるので余裕を持たせる。
-      if (ratio >= 0.985) {
-        clearInterval(intervalID)
-        progressTranscriptionAreaElement.style.display = "none"
-        completedTranscribe = true
-        btnDownloadAreaElement.classList.remove("disabled")
-        spinnerTranscribe.style.display = "none"
-        progressTranscriptionTimeLeftElement.innerText = "??時間??分??秒"
-        alert("文字起こしが完了しました。")
-      }
     }
 
     progressTranscriptionAreaElement.style.display = "block"
     transcription.transcribe(
       onProgressTranscription,
+      completeTranscribe,
       document.getElementById("language").value
     )
   })

@@ -51,7 +51,8 @@ export class Transcription {
     })
   }
 
-  transcribe = async (callbackFuncOnProgress, language) => {
+  transcribe = async (callbackFuncOnProgress, completeTranscribe, language) => {
+    complete = completeTranscribe
     const translate = false
     if (!this.#instance) {
       this.#instance = this.#module.init("whisper.bin")
