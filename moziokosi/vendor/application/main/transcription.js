@@ -13,7 +13,14 @@ export class Transcription {
     let urls = {
       base: "./vendor/application/main/whisper/models/ggml-base.bin",
       small: "./vendor/application/main/whisper/models/ggml-small.bin",
+      medium: "./vendor/application/main/whisper/models/ggml-medium.bin",
     }
+
+    // ★ mediumモデルを使って文字起こしを行うと何故かAbortedされる。
+    // wasmに対応しているファイルサイズがオーバーしてる？
+
+    // debugger
+    // modelName = "medium"
 
     let sizes = {
       "tiny.en": 75,
@@ -22,6 +29,7 @@ export class Transcription {
       base: 142,
       "small.en": 466,
       small: 466,
+      medium: 1497,
     }
 
     let url = urls[modelName]
