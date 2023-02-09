@@ -1706,3 +1706,11 @@ section {
 .footer .credits a {
   color: #fff;
 }
+
+.features-icons {
+  font-size: 4.5rem;
+}
+
+.features-icons i {
+  color: var(--color-primary);
+}
