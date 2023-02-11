@@ -14,3 +14,7 @@
   border: 1px solid #697886 !important;
   box-shadow: none !important;
 }
+
+.select2-results__option--selected {
+  background: #697886 !important;
+}
