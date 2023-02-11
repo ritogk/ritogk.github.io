@@ -33,6 +33,7 @@ label.radio input:checked + span {
 .disabled {
   opacity: 0.4;
   cursor: default !important;
+  pointer-events: none;
 }
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
