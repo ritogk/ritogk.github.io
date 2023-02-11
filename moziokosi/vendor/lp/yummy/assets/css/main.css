@@ -36,6 +36,11 @@
 body {
   font-family: var(--font-default);
   color: var(--color-default);
+  min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+  position: relative; /* ←相対位置 */
+  padding-bottom: 44px; /* ←フッターの高さを指定 */
+  box-sizing: border-box;
+  background: #eee;
 }
 
 a {
@@ -1625,6 +1630,11 @@ section {
   background-color: #1f1f24;
   padding: 10px 0;
   color: rgba(255, 255, 255, 0.7);
+
+  position: absolute; /* ←絶対位置 */
+  bottom: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .footer .icon {
