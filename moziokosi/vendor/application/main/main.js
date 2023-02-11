@@ -40,6 +40,7 @@ export const startMain = async () => {
     progressLoadModel.style.display = "none"
     completedLoadModel = true
     if (completedLoadModel && completedTranscode) {
+      btnDownloadAreaElement.classList.remove("disabled")
       btnTranscribeAreaElement.classList.remove("disabled")
     }
   }
@@ -61,6 +62,7 @@ export const startMain = async () => {
   const completeTranscode = () => {
     completedTranscode = true
     if (completedLoadModel && completedTranscode) {
+      btnDownloadAreaElement.classList.remove("disabled")
       btnTranscribeAreaElement.classList.remove("disabled")
     }
     console.log("完了")
@@ -116,7 +118,6 @@ export const startMain = async () => {
       clearInterval(intervalID)
       progressTranscriptionAreaElement.style.display = "none"
       completedTranscribe = true
-      btnDownloadAreaElement.classList.remove("disabled")
       spinnerTranscribe.style.display = "none"
       progressTranscriptionTimeLeftElement.innerText = "??時間??分??秒"
       alert("文字起こしが完了しました。")
@@ -131,7 +132,7 @@ export const startMain = async () => {
 
       // 1 / ratio * かかった時間 = 残り時間(s)
       const timeLeft = Math.floor(
-        (1 / ratio) * ((Date.now() - transcribeStartTime) / 1000)
+        ((1 - ratio) * ((Date.now() - transcribeStartTime) / 1000)) / ratio
       )
       let hour = Math.floor(timeLeft / 3600)
       let minutes = Math.floor((timeLeft % 3600) / 60)
